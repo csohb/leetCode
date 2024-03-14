@@ -33,17 +33,7 @@ func (this *MinStack) Top() int {
 
 
 func (this *MinStack) GetMin() int {
-    var min int
-    for i, v := range this.stack{
-        if i == 0 {
-            min = v
-        }
-
-        if v < min {
-            min = v
-        }
-    }
-    return min
+    return this.minStack[len(this.minStack)-1]
 }
 
 
