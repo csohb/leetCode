@@ -20,14 +20,15 @@ func minimumDeletions(word string, k int) int {
         countSlice = append(countSlice, v)
     }
 
-    sort.Slice(countSlice, func(i, j int) bool{
-        return countSlice[i] > countSlice[j]
-    })
+    // sort.Slice(countSlice, func(i, j int) bool{
+    //     return countSlice[i] > countSlice[j]
+    // })
 
     for i:= 0; i < len(countSlice); i++ {
         curCount := countSlice[i]
         delCount := 0
         for j:= 0; j < len(countSlice); j++ {
+            fmt.Printf("countSlice[j]:%d, curCount+k:%d\n",countSlice[j], curCount+k)
             if countSlice[j] > curCount + k {
                 delCount += countSlice[j] - (curCount + k)
             } else if (countSlice[j] < curCount) {
