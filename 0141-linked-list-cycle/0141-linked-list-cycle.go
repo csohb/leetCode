@@ -6,16 +6,15 @@
  * }
  */
 func hasCycle(head *ListNode) bool {
-    node := head
-    if node == nil {
+    if head == nil {
         return false
     }
 
     valList := make(map[*ListNode]int)
     
-    for ; node.Next != nil; node = node.Next {
-        valList[node]++
-        if _, ok := valList[node.Next]; ok {
+    for ; head.Next != nil; head = head.Next {
+        valList[head]++
+        if _, ok := valList[head.Next]; ok {
             return true
         }
     }
