@@ -6,30 +6,22 @@
  *     Right *TreeNode
  * }
  */
-
-
 func countNodes(root *TreeNode) int {
-    left := leftHeight(root)
-    right := rightHeight(root)
-
-    if left == right {
-        return int(math.Pow(2, float64(left))) - 1
-    } else {
-        return 1 + countNodes(root.Left) + countNodes(root.Right)
-    }
+    return dfs(root, 0)
 }
 
-
-func leftHeight(root *TreeNode) int {
+func dfs(root *TreeNode, currCnt int) int {
     if root == nil {
         return 0
     }
-    return 1 + leftHeight(root.Left)
-}
 
-func rightHeight(root *TreeNode) int {
-    if root == nil {
-        return 0
+    if root.Left != nil {
+        currCnt += 1
     }
-    return 1 + rightHeight(root.Right)
-}
+
+    if root.Right != nil {
+        currCnt += 1
+    }
+
+    return 1 + dfs(root.Left, currCnt) + dfs(root.Right, currCnt)
+} 
