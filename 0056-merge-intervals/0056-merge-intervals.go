@@ -1,8 +1,5 @@
 func merge(intervals [][]int) [][]int {
     var answer [][]int
-    // start, last 
-    // 2.start <= 1.last -> 1.last 2.last 더 큰걸로 last
-    // 2.start > l.last // new list 
 
     if len(intervals) == 0 {
         return answer
@@ -21,10 +18,6 @@ func merge(intervals [][]int) [][]int {
     var last int
     var curr []int
     for i, v := range intervals {
-        // fmt.Println("start:",start)
-        // fmt.Println("last:",last)
-        // fmt.Println("curr:",curr)
-        // fmt.Println("v:",v)
         if i == 0 {
             start = v[0]
             last = v[1]
