@@ -33,7 +33,6 @@ func summaryRanges(nums []int) []string {
                 continue
         }
         if len(currRange) == 1 {
-                fmt.Println("currRange:",currRange)
                 result = append(result, fmt.Sprintf("%d",currRange[0]))
                 currRange = []int{}
                 start = nums[numsIndex]
@@ -43,36 +42,9 @@ func summaryRanges(nums []int) []string {
             result = append(result, fmt.Sprintf("%d->%d",currRange[0], currRange[len(currRange)-1]))
             currRange = []int{}
             start = nums[numsIndex]
-            fmt.Println("start:",start)
             continue
     }
    }
 
-//    for i:= nums[0]; i<=nums[len(nums)-1]+1; i++ {
-//         fmt.Println("start i:",i)
-//         if numsMap[i] {
-//             currRange = append(currRange, i)
-//             numsIndex++
-//             fmt.Println("currRange:",currRange)
-//             continue
-//         } else {
-//             if len(currRange) < 1 {
-//                 continue
-//             }
-//             if len(currRange) == 1 {
-//                 fmt.Println("currRange:",currRange)
-//                 result = append(result, fmt.Sprintf("%d",currRange[0]))
-//                 currRange = []int{}
-//                 i = nums[numsIndex]
-//                 continue
-//             }
-            
-//             result = append(result, fmt.Sprintf("%d->%d",currRange[0], currRange[len(currRange)-1]))
-//             currRange = []int{}
-//             i = nums[numsIndex]
-//             fmt.Println("i:",i)
-//             continue
-//         }
-//    }
    return result 
 }
