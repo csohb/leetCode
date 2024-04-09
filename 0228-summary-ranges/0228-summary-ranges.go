@@ -18,11 +18,7 @@ func summaryRanges(nums []int) []string {
         currRange = append(currRange, start)
         // 마지막 숫자
         if start == nums[len(nums) -1] {
-            if len(currRange) == 1 {
-                result = append(result, fmt.Sprintf("%d",currRange[0]))
-            } else {
-                result = append(result, fmt.Sprintf("%d->%d",currRange[0], currRange[len(currRange)-1]))
-            }
+            result = append(result, makeResultStr(currRange))
             break
         }
         numsIndex++
@@ -32,19 +28,31 @@ func summaryRanges(nums []int) []string {
                 start++
                 continue
         }
-        if len(currRange) == 1 {
-                result = append(result, fmt.Sprintf("%d",currRange[0]))
-                currRange = []int{}
-                start = nums[numsIndex]
-                continue
-            }
+        result = append(result, makeResultStr(currRange))
+        currRange = []int{}
+        start = nums[numsIndex]
+        continue
+        // if len(currRange) == 1 {
+        //         result = append(result, fmt.Sprintf("%d",currRange[0]))
+        //         currRange = []int{}
+        //         start = nums[numsIndex]
+        //         continue
+        //     }
             
-            result = append(result, fmt.Sprintf("%d->%d",currRange[0], currRange[len(currRange)-1]))
-            currRange = []int{}
-            start = nums[numsIndex]
-            continue
+        //     result = append(result, fmt.Sprintf("%d->%d",currRange[0], currRange[len(currRange)-1]))
+        //     currRange = []int{}
+        //     start = nums[numsIndex]
+        //     continue
     }
    }
 
    return result 
+}
+
+func makeResultStr(currRange []int) string {
+    if len(currRange) == 1 {
+        return fmt.Sprintf("%d",currRange[0])
+    } else {
+        return fmt.Sprintf("%d->%d",currRange[0], currRange[len(currRange)-1])
+    }
 }
