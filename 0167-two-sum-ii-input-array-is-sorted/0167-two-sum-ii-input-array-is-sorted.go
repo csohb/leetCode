@@ -1,18 +1,24 @@
 func twoSum(numbers []int, target int) []int {
-    // two sum ... 
-    start := 0
-    end := len(numbers) - 1
-    answer := make([]int, 0, 2)
+    var answer []int
 
-    for end > start {
-        if numbers[start] + numbers[end] > target {
-            end--
-        } else if numbers[start] + numbers[end] < target{
-            start++
+    left, right := 0, len(numbers) - 1
+    for left < right {
+        l := numbers[left]
+        r := numbers[right]
+
+        fmt.Println("l:",l)
+        fmt.Println("r:",r)
+        if l+r == target {
+            answer = []int{left+1, right+1}
+            break
+        }
+
+        if l+r > target {
+            right--
         } else {
-            answer = []int{start+1, end+1}
-            return answer
+            left++
         }
     }
+
     return answer
 }
