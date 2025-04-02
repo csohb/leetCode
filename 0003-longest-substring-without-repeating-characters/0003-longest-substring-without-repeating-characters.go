@@ -1,29 +1,22 @@
 func lengthOfLongestSubstring(s string) int {
-    if len(s) < 1 {
-        return 0
-    }
+    // sliding window
+    max := 0
+    charMap := make(map[byte]int)
+    left := 0
+    right := 0
+    for right < len(s) {
+        charMap[s[right]]++
 
-    max := 1
-    
-    for i, _ := range s {
-        charMap := make(map[byte]bool)
-        charMap[s[i]] = true
-        //fmt.Println("s[i]:", string(s[i]))
-        cnt := 1
-        for ii := i + 1; ii < len(s); ii++ {
-            if charMap[s[ii]] == false {
-                //fmt.Println("s[ii]:", string(s[ii]))
-                charMap[s[ii]] = true
-                cnt++
-                //fmt.Println("cnt:",cnt)
-                if cnt > max {
-                    max = cnt
-                }
-            } else {
-                break
-            }
+        for left < right && charMap[s[right]] > 1 {
+            charMap[s[left]]--
+            left++
         }
-    }   
+
+        if max < (right - left + 1) {
+            max = right - left + 1
+        }
+        right++
+    }
 
     return max
 }
