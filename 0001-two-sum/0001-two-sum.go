@@ -1,15 +1,15 @@
 func twoSum(nums []int, target int) []int {
-    // two numbers 
-    var result []int
-    targetMap := make(map[int]int)
+    // only one solution -> when solution founded return
+    output := []int{}
 
-    for i, v := range nums {
-        diff := target - v
-        if vv, ok := targetMap[diff]; ok {
-            result = []int{i, vv}
+    for i, _ := range nums {
+        for ii:= i + 1; ii < len(nums); ii++ {
+            if nums[i] + nums[ii] == target {
+                output = append(output, i, ii)
+                return output
+            }
         }
-        targetMap[v] = i
     }
 
-    return result
+    return output
 }
