@@ -1,22 +1,63 @@
 func lengthOfLongestSubstring(s string) int {
-    // sliding window
-    max := 0
-    charMap := make(map[byte]int)
-    left := 0
-    right := 0
-    for right < len(s) {
-        charMap[s[right]]++
-
-        for left < right && charMap[s[right]] > 1 {
-            charMap[s[left]]--
-            left++
-        }
-
-        if max < (right - left + 1) {
-            max = right - left + 1
-        }
-        right++
+    // first answer
+    /*if len(s) < 1 {
+        return 0
     }
 
-    return max
+    max := 1
+    
+    for i, _ := range s {
+        charMap := make(map[byte]bool)
+        charMap[s[i]] = true
+        //fmt.Println("s[i]:", string(s[i]))
+        cnt := 1
+        for ii := i + 1; ii < len(s); ii++ {
+            if charMap[s[ii]] == false {
+                //fmt.Println("s[ii]:", string(s[ii]))
+                charMap[s[ii]] = true
+                cnt++
+                //fmt.Println("cnt:",cnt)
+                if cnt > max {
+                    max = cnt
+                }
+            } else {
+                break
+            }
+        }
+    }   
+
+    return max*/
+
+    // sliding window
+    // charSet := make(map[byte]bool)
+    // l := 0
+    // res := 0
+
+    // for r := 0; r < len(s); r++ {
+    //     for charSet[s[r]] {
+    //         delete(charSet, s[l])
+    //         l++
+    //     }
+    //     charSet[s[r]] = true
+    //     res = max(res, r-l+1)
+    // }
+    
+    // return res
+
+
+    l := 0
+    res := 0
+
+    charMap := make(map[byte]bool)
+    
+    for r:=0; r < len(s); r++ {
+        for charMap[s[r]] {
+            delete(charMap,s[l])
+            l++
+        }
+        charMap[s[r]] = true
+        res = max(res, r-l+1)
+    }
+
+    return res
 }
