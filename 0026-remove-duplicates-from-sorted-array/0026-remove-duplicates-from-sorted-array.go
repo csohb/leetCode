@@ -1,12 +1,29 @@
 func removeDuplicates(nums []int) int {
-    var j int
-    numMap := make(map[int]int, 0)
-    for _, v := range nums {
-        if _, ok := numMap[v]; !ok {
-            numMap[v] = 1
-            nums[j] = v
-            j++
-        }
+    if len(nums) <= 0 {
+        return 0
     }
-    return j
+
+    dup:=0
+    newNum := []int{}
+    curr := nums[0]
+    newNum = append(newNum, curr)
+
+    // count duplicate 
+    for i:=1; i < len(nums); i++ {
+        if nums[i] == curr {
+            dup++
+            continue
+        }
+        newNum = append(newNum, nums[i])
+        curr = nums[i]
+    }
+
+
+
+    for i:=0; i<len(newNum); i++ {
+        nums[i] = newNum[i]
+    }
+
+    res := len(newNum)
+    return res
 }
