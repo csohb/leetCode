@@ -16,7 +16,7 @@ func maxDepth(root *TreeNode) int {
     return 1+max(maxDepth(root.Left), maxDepth(root.Right))*/
 
     // BFS
-    if root == nil {
+    /*if root == nil {
         return 0
     }
 
@@ -42,6 +42,37 @@ func maxDepth(root *TreeNode) int {
         }
     }
 
-    return depth
+    return depth*/
+
+    // DFS
+
+    if root == nil {
+        return 0
+    }
+    stack := []Depth{{root,1}}
+    maxDepth := 0 
+
+    for len(stack) > 0 {
+        curr := stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+
+        if maxDepth < curr.depth {
+            maxDepth = curr.depth
+        }
+
+        if curr.node.Right != nil {
+            stack = append(stack, Depth{curr.node.Right,curr.depth+1})
+        }
+
+        if curr.node.Left != nil {
+            stack = append(stack, Depth{curr.node.Left, curr.depth+1})
+        }
+    }
+    return maxDepth
+}
+
+type Depth struct {
+    node *TreeNode
+    depth int
 }
 
