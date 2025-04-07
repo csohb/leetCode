@@ -6,68 +6,42 @@
  *     Right *TreeNode
  * }
  */
-import (
-    "fmt"
-)
 
 func maxDepth(root *TreeNode) int {
+    // recursive dfs
+    /*if root == nil {
+        return 0
+    }
+
+    return 1+max(maxDepth(root.Left), maxDepth(root.Right))*/
+
+    // BFS
     if root == nil {
         return 0
-    } else if root.Left == nil && root.Right == nil {
-        return 1
     }
-    return 1 + max(maxDepth(root.Left), maxDepth(root.Right))
+
+    queue := []*TreeNode{root}
+    depth := 0
+
+    for len(queue) > 0 {
+        depth++
+
+        level := len(queue)
+
+        for i := 0; i < level; i++ {
+            curr := queue[0]
+            queue = queue[1:]
+
+            if curr.Left != nil {
+                queue = append(queue, curr.Left)
+            }
+
+            if curr.Right != nil {
+                queue = append(queue, curr.Right)
+            }
+        }
+    }
+
+    return depth
 }
 
-func max(a, b int) int {
-    if a > b {
-        return a
-    } else {
-        return b
-    }
-}
-
-func dfs(root *TreeNode, result int) int {
-    if root == nil {
-        return result
-    }
-
-    if root.Left == nil && root.Right == nil {
-        return result
-    }
-
-    if root.Left != nil {
-        result++
-        dfs(root.Left, result)
-    }
-
-    if root.Right != nil {
-        result++
-        dfs(root.Right, result)
-    }
-    return result
-}
-
-func dfsLeft(root *TreeNode, result int) int {
-    if root.Left == nil {
-        return result
-    }
-
-    if root.Left != nil {
-        result++
-        dfs(root.Left, result)
-    }
-    return result
-}
-
-func dfsRight(root *TreeNode, result int) int {
-    if root.Right == nil {
-        return result
-    }
-
-    if root.Right != nil {
-        result++
-        dfs(root.Right, result)
-    }
-    return result
-}
