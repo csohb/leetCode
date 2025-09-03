@@ -1,15 +1,18 @@
 func twoSum(nums []int, target int) []int {
-    // only one solution -> when solution founded return
-    output := []int{}
+    res := make([]int, 0)
+    for i, v := range nums {
+       
+        sum := v
 
-    for i, _ := range nums {
-        for ii:= i + 1; ii < len(nums); ii++ {
-            if nums[i] + nums[ii] == target {
-                output = append(output, i, ii)
-                return output
+        for j:=i+1; j<len(nums); j++ {
+            if sum + nums[j] == target {
+                fmt.Println("i:",nums[i])
+                fmt.Println("j:",nums[j])
+                res = append(res, i)
+                res = append(res, j)
             }
         }
     }
 
-    return output
+    return res
 }
