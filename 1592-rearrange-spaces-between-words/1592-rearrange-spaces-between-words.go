@@ -32,10 +32,8 @@ func reorderSpaces(text string) string {
         return res
     }
 
-    fmt.Println("len(strArr):", len(strArr))
-
+    
     howMany := spaceCnt / (len(strArr) -1)
-    fmt.Println("howMany:", howMany)
     left := spaceCnt % (len(strArr) -1)
 
     var space string
@@ -52,7 +50,6 @@ func reorderSpaces(text string) string {
         }
         
         res += v + space
-        fmt.Println("res:", res)
     }
 
     if left > 0 {
