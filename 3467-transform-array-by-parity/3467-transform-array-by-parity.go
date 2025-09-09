@@ -3,47 +3,47 @@ func transformArray(nums []int) []int {
     // time complexity -> O(n), 
     // space complexity -> O(1)
 
-    // 1, 2 steps
-    // for i, num := range nums {
-    //     if num % 2 == 0 {
-    //         nums[i] = 0
-    //     } else {
-    //         nums[i] = 1
-    //     }
-    // }
+    1, 2 steps
+    for i, num := range nums {
+        if num % 2 == 0 {
+            nums[i] = 0
+        } else {
+            nums[i] = 1
+        }
+    }
 
-    // // step 3
-    // // sort.Slice -> O(n)
-    // sort.Slice(nums, func(i, j int) bool{
-    //     return nums[i] < nums[j]
-    // })
+    // step 3
+    // sort.Slice -> O(nlogn) -> quick sort
+    sort.Slice(nums, func(i, j int) bool{
+        return nums[i] < nums[j]
+    })
 
-    // return nums
+    return nums
 
     // 2. count how many even / odd numbers -> create new arr with cnt 
     // time complexity -> O(n)
     // space complexity -> O(n)
 
-    var evenCnt, oddCnt int
-    resArr := make([]int, 0, len(nums))
+    // var evenCnt, oddCnt int
+    // resArr := make([]int, 0, len(nums))
 
-    for _, num := range nums {
-        if num % 2 == 0 {
-            evenCnt++
-        } else {
-            oddCnt++
-        }
-    }
+    // for _, num := range nums {
+    //     if num % 2 == 0 {
+    //         evenCnt++
+    //     } else {
+    //         oddCnt++
+    //     }
+    // }
 
-    for evenCnt > 0 {
-        resArr = append(resArr, 0)
-        evenCnt--
-    }
+    // for evenCnt > 0 {
+    //     resArr = append(resArr, 0)
+    //     evenCnt--
+    // }
     
-    for oddCnt > 0 {
-        resArr = append(resArr, 1)
-        oddCnt--
-    }
+    // for oddCnt > 0 {
+    //     resArr = append(resArr, 1)
+    //     oddCnt--
+    // }
 
-    return resArr
+    // return resArr
 }
