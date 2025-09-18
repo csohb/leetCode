@@ -1,21 +1,34 @@
 func groupAnagrams(strs []string) [][]string {
-    // map check if all char is included
-    m := make(map[string][]string)
+    // for loop n times n = len(strs) : time complexity O(n)
+    // group with same annagram
+    // new str -> need to find if it's exists or not (group)
+        // hashMap to find the key : time complexity O(1)
+    // if yes then add in the arr 
+    // if no then create new arr and add in result
+
+    res := make([][]string, 0, len(strs))
+    hMap := make(map[string][]string)
 
     for _, str := range strs {
-        // split all char
-        chars := strings.Split(str, "")
-        // sort it asc
-        sort.Strings(chars)
-        // join to make key char ex) aet
-        key := strings.Join(chars, "")
-        m[key] = append(m[key], str)
+        sortArr := make([]byte, 0)
+        for _, alphabet := range str {
+            // byte
+            sortArr = append(sortArr, byte(alphabet))
+        }
+        sort.Slice(sortArr, func(i, j int) bool{
+            return sortArr[i] < sortArr[j]
+        })
+        sortedWord := string(sortArr)
+        
+        if _, ok := hMap[sortedWord]; ok {
+            hMap[sortedWord] = append(hMap[sortedWord], str)
+        } else {
+            hMap[sortedWord] = append([]string{}, str)
+        }
     }
 
-    res := make([][]string, 0, len(m))
-    for _, v := range m {
+    for _, v := range hMap {
         res = append(res, v)
     }
-
     return res
 }
