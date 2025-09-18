@@ -1,54 +1,43 @@
 func isValid(s string) bool {
-    if len(s) % 2 != 0 || len(s) == 0{
+    // stack 
+    // open brackets are pushed to stack
+    // whenever s meets closing brackets then compare with last input data
+    // stack[len(stack)] -> if it's pair then continue otherwise false
+
+    if len(s) % 2 == 1 {
         return false
     }
 
-    bracketMap := map[rune]rune {
-        '}': '{',
-		']': '[',
-		')': '(',
+    stack := []rune{}
+
+    for _, ss := range s {
+        if ss == '(' || ss == '{' || ss == '[' {
+            stack = append(stack, ss)
+        } else {
+            if len(stack) <= 0 {
+                return false
+            }
+            last := stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            switch ss {
+            case ')': 
+                if last != '(' {
+                    return false
+                }
+            case '}':
+                if last != '{' {
+                    return false
+                }
+            case ']':
+                if last != '[' {
+                    return false
+                }
+            }
+        }
     }
 
-    bracket := NewBracketStack(len(s))
-
-    for _, char := range s {
-        opening, ok := bracketMap[char] 
-        if !ok {
-            bracket.Push(char)
-            continue
-        }
-
-        // if closing
-        if len(bracket.stack) == 0 {
-            return false
-        }
-
-        if bracket.stack[len(bracket.stack)-1] != opening {
-            return false
-        }
-
-        // pop opening bracket
-        bracket.Pop()
+    if len(stack) > 0 {
+        return false
     }
-
-    return len(bracket.stack) == 0
+    return true
 }
-
-type bracketStack struct {
-    stack []rune
-}
-
-func NewBracketStack(sLen int) *bracketStack {
-    return &bracketStack{
-        stack : make([]rune, 0, sLen),
-    }
-}
-
-func(b *bracketStack) Push(sChar rune) {
-    b.stack = append(b.stack, sChar)
-}
-
-func(b *bracketStack) Pop() {
-    b.stack = b.stack[:len(b.stack)-1]
-}
-
