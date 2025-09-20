@@ -7,29 +7,40 @@
  * }
  */
 func levelOrder(root *TreeNode) [][]int {
-    var answer [][]int
+    // bfs
+    // each level
+    // queue
+
     if root == nil {
-        return answer
+        return nil
     }
-    currLevel := make([]*TreeNode, 0)
-    currLevel = append(currLevel, root)
 
-    for len(currLevel) > 0 {
-        nextLevel := make([]*TreeNode, 0)
-        levelArr := []int{}
-        for _, node := range currLevel {
-            levelArr = append(levelArr, node.Val)
-            if node.Left != nil {
-                nextLevel = append(nextLevel, node.Left)
-            }
+    res := [][]int{}
+    queue := []*TreeNode{root}
 
-            if node.Right != nil {
-                nextLevel = append(nextLevel, node.Right)
-            }
+    for len(queue) > 0 {
+        // level size
+        size := len(queue)
+        level := []int{} // each element of res array
+
+        for i:=0; i<size; i++ {
+            n:= queue[0]
+        queue = queue[1:]
+
+
+        if n.Left != nil {
+            queue = append(queue, n.Left)
         }
-        answer = append(answer, levelArr)
-        currLevel = nextLevel
+
+        if n.Right != nil {
+            queue = append(queue, n.Right)
+        }
+
+        level = append(level, n.Val)
+        }
+
+        res = append(res, level)
     }
 
-    return answer 
+    return res
 }
