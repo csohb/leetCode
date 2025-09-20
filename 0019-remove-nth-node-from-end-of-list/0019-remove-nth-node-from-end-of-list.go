@@ -6,41 +6,28 @@
  * }
  */
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
-    if head == nil || n <= 0 {
-        return head
-    } 
+    // to remove node in List, need to know what is the end
+    // from the end, search nth node
+    // store prev
 
+    dummy := &ListNode{Next: head}
 
-    // n은 뒤에서 n번째를 의미
-    dummy := &ListNode{0, head}
-    node := dummy.Next
+    left := dummy
+    right := head
 
-    var length int
-    for node != nil {
-        node = node.Next
-        length++ //5
-    }
-
-    // len = 5, n = 2 3
-
-    fmt.Println("length:",length)
-
-    if length - n == 0 {
-        return nil
+    for n > 0 && right != nil {
+        right = right.Next
+        n--
     }
 
 
-    current := dummy.Next 
-
-    for i:=1; i <= length; i++ {
-        if i == length - n {
-            nextNext := current.Next.Next
-            current.Next = nextNext
-            continue
-        } 
-        current = current.Next
+    for right != nil {
+        right = right.Next
+        left = left.Next
     }
 
 
-    return head
+    left.Next = left.Next.Next
+
+    return dummy.Next
 }
