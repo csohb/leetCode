@@ -6,13 +6,15 @@
  * }
  */
 func hasCycle(head *ListNode) bool {
-    slow, fast := head, head
-    for fast != nil && fast.Next != nil {
-        slow = slow.Next
-        fast = fast.Next.Next
-        if slow == fast {
+    // use hashMap to record vistied node
+    hMap := make(map[*ListNode]bool)
+    curr := head
+    for curr != nil {
+        if _, ok := hMap[curr]; ok {
             return true
         }
+        hMap[curr] = true
+        curr = curr.Next
     }
 
     return false
