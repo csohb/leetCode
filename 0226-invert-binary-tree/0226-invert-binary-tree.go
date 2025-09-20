@@ -7,30 +7,23 @@
  * }
  */
 func invertTree(root *TreeNode) *TreeNode {
-    // BFS
-    // switch in each level of tree
     if root == nil {
-        return nil
+        return root
     }
-
     queue := []*TreeNode{root}
 
     for len(queue) > 0 {
-        level := len(queue)
+        n := queue[0]
+        queue = queue[1:]
 
-        for i:=0; i < level; i++ {
-            curr := queue[0]
-            queue = queue[1:]
+        n.Left, n.Right = n.Right, n.Left
 
-            curr.Left, curr.Right = curr.Right, curr.Left
+        if n.Left != nil {
+            queue = append(queue, n.Left)
+        }
 
-            if curr.Left != nil {
-                queue = append(queue, curr.Left)
-            }
-
-            if curr.Right != nil {
-                queue = append(queue, curr.Right)
-            }
+        if n.Right != nil {
+            queue = append(queue, n.Right)
         }
     }
 
