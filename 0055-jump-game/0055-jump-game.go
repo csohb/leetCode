@@ -1,18 +1,17 @@
 func canJump(nums []int) bool {
-    // how far we can reach : farhest
-    // update max
-    // 0  
+    // save max reach
     var max int
-    for index:=0; index<len(nums); index++ {
-        if index > max {
+
+    for i:=0; i<len(nums); i++ {
+        if i > max {
             return false
         }
-        // index :0, nums[index]: 2
-        if index + nums[index] > max {
-            max = index + nums[index]
+
+        if i + nums[i] > max {
+            max = i + nums[i]
         }
 
-        if max >= len(nums) - 1 {
+        if max >= len(nums) - 1{
             return true
         }
     }
