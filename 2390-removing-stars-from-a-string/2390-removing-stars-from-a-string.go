@@ -1,31 +1,42 @@
-func removeStars(s string) string {
-    sByte := []byte(s)
+// func removeStars(s string) string {
+//     res := ""
+//     for i:=0; i < len(s); i++ {
+//         if string(s[i]) == "*" && i - 1 >= 0{
+//             res = res[:len(res)-1]
+//         } else {
+//             res += string(s[i])
+//         }
+//     }
 
-    newStr := strStack{}
-    for _, v := range sByte {
-        if v != '*' {
-            // push v to stack 
-            newStr.Push(v)
-            //fmt.Println("newStr:", newStr)
-            //newStr += string(v)
+//     return res
+// }
+
+func removeStars(s string) string { 
+    // sbyte := []byte(s)
+
+    // stack := []byte{}
+    // for i:=0; i<len(sbyte); i++ {
+    //     if s[i] == '*' {
+    //         stack = stack[:len(stack)-1]
+    //     } else {
+    //         stack = append(stack, s[i])
+    //     }
+    // }
+
+    // return string(stack)
+
+
+    // whenever it meets * then remove the left string
+
+    sByte := []byte{}
+
+    for i:=0; i < len(s); i++ {
+        if string(s[i]) == "*" {
+            sByte = sByte[:len(sByte)-1]
         } else {
-            // pop a character from stack
-            newStr.Pop()
-            //newStr = newStr[:len(newStr) - 1]
-        }  
+            sByte = append(sByte, s[i])
+        }
     }
 
-    return string(newStr.arr)
-}
-
-type strStack struct {
-    arr []byte
-}
-
-func (s *strStack) Push(char byte) {
-    s.arr = append(s.arr, char)
-} 
-
-func (s *strStack) Pop() {
-    s.arr = s.arr[:len(s.arr)-1]
+    return string(sByte)
 }
