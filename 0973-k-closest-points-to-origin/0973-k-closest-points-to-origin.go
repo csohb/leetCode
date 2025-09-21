@@ -1,26 +1,25 @@
 func kClosest(points [][]int, k int) [][]int {
-    // *Minimum or Closest -> Min Heap
-    res := make([][]int, 0)
+    res := [][]int{}
 
-    mHeap := &MinHeap{}
-    heap.Init(mHeap)
+    minHeap := &MinHeap{}
+    heap.Init(minHeap)
 
     for _, point := range points {
         x := point[0]
         y := point[1]
+
         distance := (x*x) + (y*y)
 
-        heap.Push(mHeap, Point{distance, x, y})
+        heap.Push(minHeap, Point{distance, x, y})
     }
 
-
     for k > 0 {
-        point := heap.Pop(mHeap).(Point)
-        res = append(res, []int{point.x,point.y})
+        point := heap.Pop(minHeap).(Point)
+        res = append(res, []int{point.x, point.y})
         k--
     }
 
-    return res
+    return res    
 }
 
 type Point struct {
@@ -47,10 +46,10 @@ func(h *MinHeap) Push(x interface{}) {
     *h = append(*h, x.(Point))
 }
 
-func(h *MinHeap) Pop() interface{} {
+func(h *MinHeap) Pop() interface{}{
     old := *h
     n := len(old)
     x := old[n-1]
-    *h = old[0:n-1]
+    *h = old[:n-1]
     return x
 }
