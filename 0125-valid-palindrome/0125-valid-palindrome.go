@@ -23,14 +23,10 @@ func isPalindrome(s string) bool {
 
     start := 0
     end := len(newS) - 1
-    mid := len(newS) / 2
-
-    for mid > 0 {
+    for start < end {
         if newS[start] == newS[end] {
             start++
             end--
-            
-            mid--
             continue
         } else {
             return false
