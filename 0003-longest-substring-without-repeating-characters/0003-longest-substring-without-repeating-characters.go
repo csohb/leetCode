@@ -44,19 +44,17 @@ func lengthOfLongestSubstring(s string) int {
     
     // return res
 
-
-    l := 0
+    left := 0
     res := 0
+    hMap := make(map[byte]bool)
 
-    charMap := make(map[byte]bool)
-    
-    for r:=0; r < len(s); r++ {
-        for charMap[s[r]] {
-            delete(charMap,s[l])
-            l++
+    for right := 0; right < len(s); right++ {
+        for hMap[s[right]] {
+            delete(hMap, s[left])
+            left++
         }
-        charMap[s[r]] = true
-        res = max(res, r-l+1)
+        hMap[s[right]] = true
+        res = max(res, right - left + 1)
     }
 
     return res
