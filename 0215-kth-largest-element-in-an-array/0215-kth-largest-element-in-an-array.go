@@ -1,40 +1,45 @@
-type MinHeap []int
-
-func(m MinHeap) Less(i, j int) bool {
-    return m[i] > m[j]
-}
-
-func(m MinHeap) Swap(i, j int) {
-    m[i], m[j] = m[j], m[i]
-}
-
-func(m MinHeap) Len() int {
-    return len(m)
-}
-
-func(m *MinHeap) Push(v any) {
-    *m = append(*m, v.(int))
-}
-
-func(m *MinHeap) Pop() any {
-    old := *m
-    n := len(old)
-    x := old[n-1]
-    *m = old[0:n-1]
-    return x
-}
-
 func findKthLargest(nums []int, k int) int {
-    h := &MinHeap{}
-    for i:=0; i< len(nums); i++ {
-        heap.Push(h, nums[i])
-    }
+    // max or min -> heap 
+    // when input, it will be sorted 
+    // time complexity will be O(1)
+    numHeap := &MaxHeap{}
+    heap.Init(numHeap)
 
-    var result int
+    for _, v := range nums {
+        heap.Push(numHeap, v)
+    }   
+
+    var res int
     for k > 0 {
-        result = heap.Pop(h).(int)
+        res = heap.Pop(numHeap).(int)
         k--
     }
 
-    return result
+    return res
+}
+
+type MaxHeap []int
+
+func(h MaxHeap) Len() int {
+    return len(h)
+}
+
+func(h MaxHeap) Swap(i, j int) {
+    h[i], h[j] = h[j], h[i]
+}
+
+func(h MaxHeap) Less(i, j int) bool {
+    return h[i] > h[j]
+}
+
+func(h *MaxHeap) Push(x interface{}) {
+    *h = append(*h, x.(int))
+}
+
+func(h *MaxHeap) Pop() interface{} {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
 }
